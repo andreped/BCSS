@@ -21,12 +21,17 @@ for image_id in os.listdir(data_dir + "images/"):
 
     for image_patch, mask_patch in zip(*streamers):
 
-        image_patch = np.asarray(image_patch)
-        mask_patch = np.asarray(mask_patch)
+        image_patch = np.asarray(image_patch).astype("float32")
+        mask_patch = np.asarray(mask_patch).astype("uint8")
 
-        fig, ax = plt.subplots(1, 3)
+        image_patch = image_patch / np.amax(image_patch)
+
+        fig, ax = plt.subplots(1, 3, figsize=(18, 8))
         ax[0].imshow(image_patch)
         ax[1].imshow(mask_patch, cmap="jet", interpolation="none")
         ax[2].imshow(image_patch)
         ax[2].imshow(mask_patch, cmap="jet", interpolation="none", alpha=0.5)
+        for i in range(3):
+            ax[i].axis("off")
+        fig.tight_layout()
         plt.show()
