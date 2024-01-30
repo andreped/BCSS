@@ -4,3 +4,6 @@ images/
 masks/
 wsis/
 annotations/
+venv/
+data/
+*.DS_Store
